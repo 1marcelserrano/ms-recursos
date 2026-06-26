@@ -8,7 +8,7 @@ export default function HomePage() {
     <div className="mx-auto max-w-3xl px-6">
       {/* Hero — retrato acima, texto abaixo */}
       <section className="pt-16 sm:pt-24">
-        <div className="w-64 sm:w-80">
+        <div className="mx-auto w-64 sm:w-80">
           <Portrait />
         </div>
         <div className="mt-10">
