@@ -76,6 +76,34 @@ export const FREEBIES: Freebie[] = [
   },
   {
     order: 4,
+    skillId: "premortem",
+    keyword: "PREMORTEM",
+    title: "Mate a ideia ruim antes que ela te mate.",
+    subtitle: "Um checklist que expõe o risco que você não viu.",
+    lane: "DECISÃO",
+    funnel: "executivo",
+    surveyTag: "int-decidir",
+    ctaDestination: "GATED",
+    assetUrl:
+      process.env.NEXT_PUBLIC_FREEBIE_PREMORTEM_URL ||
+      "https://github.com/1marcelserrano/premortem",
+  },
+  {
+    order: 5,
+    skillId: "llm-council",
+    keyword: "COUNCIL",
+    title: "Põe vários modelos de IA pra debater a sua decisão.",
+    subtitle: "Um conselho que devolve um veredito, não um chute.",
+    lane: "DECISÃO",
+    funnel: "executivo",
+    surveyTag: "int-decidir",
+    ctaDestination: "GATED",
+    assetUrl:
+      process.env.NEXT_PUBLIC_FREEBIE_COUNCIL_URL ||
+      "https://github.com/1marcelserrano/llm-council",
+  },
+  {
+    order: 6,
     skillId: "prompt-chain",
     keyword: "FLUXO",
     title: "Pare de pedir uma coisa por vez. Encadeie e veja rodar.",
