@@ -34,30 +34,6 @@ const PLACEHOLDER = "#";
 export const FREEBIES: Freebie[] = [
   {
     order: 1,
-    skillId: "ms-poster-studio",
-    keyword: "POSTER",
-    title: "Faça um pôster que para o scroll — em minutos.",
-    subtitle: "Copia, cola, gera. Seu primeiro resultado visual hoje.",
-    lane: "CONTEÚDO",
-    funnel: "criador",
-    surveyTag: "int-produzir",
-    ctaDestination: "DIRECT", // card-âncora aberto (estratégia híbrida)
-    assetUrl: process.env.NEXT_PUBLIC_FREEBIE_POSTER_URL || PLACEHOLDER,
-  },
-  {
-    order: 2,
-    skillId: "ms-reverse-shot-reel",
-    keyword: "REEL",
-    title: "Um Reel com a sua cara e a sua voz — feito por IA.",
-    subtitle: "O começo do seu estúdio de clone.",
-    lane: "CONTEÚDO",
-    funnel: "criador",
-    surveyTag: "int-produzir",
-    ctaDestination: "GATED",
-    assetUrl: process.env.NEXT_PUBLIC_FREEBIE_REEL_URL || PLACEHOLDER,
-  },
-  {
-    order: 3,
     skillId: "nem-parece-ia",
     keyword: "VOZ",
     title: "Escreva com IA sem parecer um robô.",
@@ -71,7 +47,7 @@ export const FREEBIES: Freebie[] = [
       "https://github.com/1marcelserrano/nem-parece-ia",
   },
   {
-    order: 4,
+    order: 2,
     skillId: "oracle-diagnostic-lite",
     keyword: "ORACLE",
     title: "Onde o seu critério evapora? Diagnóstico em 5 minutos.",
@@ -85,7 +61,7 @@ export const FREEBIES: Freebie[] = [
       "https://github.com/1marcelserrano/oracle-diagnostic-lite",
   },
   {
-    order: 5,
+    order: 3,
     skillId: "prompt-chain",
     keyword: "FLUXO",
     title: "Pare de pedir uma coisa por vez. Encadeie e veja rodar.",
@@ -97,20 +73,6 @@ export const FREEBIES: Freebie[] = [
     assetUrl:
       process.env.NEXT_PUBLIC_FREEBIE_FLUXO_URL ||
       "https://github.com/1marcelserrano/prompt-chain",
-  },
-  {
-    order: 6,
-    skillId: "mscreative-skills",
-    keyword: "SKILLS",
-    title: "Tem muito mais de onde veio.",
-    subtitle: "O catálogo aberto das minhas skills.",
-    lane: "CATÁLOGO",
-    funnel: "ambos",
-    surveyTag: "int-produzir",
-    ctaDestination: "DIRECT",
-    assetUrl:
-      process.env.NEXT_PUBLIC_FREEBIE_SKILLS_URL ||
-      "https://github.com/1marcelserrano/mscreative-skills",
   },
 ];
 
