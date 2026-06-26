@@ -2,30 +2,43 @@
 
 import { useState } from "react";
 
-const Q1_OPTIONS = [
-  "Turma ao vivo (juntos, com calendário)",
-  "Biblioteca no seu ritmo (vídeos + currículo)",
-  "Os dois / ainda não sei",
+// Enquete-classificador: posiciona o lead na escada comercial.
+// perfil × momento × interesse + pergunta aberta (voz do cliente).
+
+const PERFIL_OPTIONS = [
+  { value: "solo", label: "Criativo solo" },
+  { value: "estudio", label: "Freelancer ou estúdio" },
+  { value: "ceo", label: "Fundador ou CEO" },
+  { value: "comecando", label: "Começando agora" },
 ];
 
-const Q2_OPTIONS = [
+const MOMENTO_OPTIONS = [
+  { value: "travado", label: "Travado, com medo de ficar pra trás" },
+  { value: "usa-naofatura", label: "Uso IA, mas não faturo com isso" },
+  { value: "faturando", label: "Já faturo e quero escalar" },
+  { value: "zero", label: "Nunca usei IA direito" },
+];
+
+const INTERESSE_OPTIONS = [
   "Automatizar meu negócio",
   "Produzir conteúdo com a minha cara",
   "Decidir melhor",
-  "Montar a IA do meu time/empresa",
+  "Montar a IA do meu time ou empresa",
 ];
 
 export function Survey() {
-  const [q1, setQ1] = useState<string>("");
-  const [q2, setQ2] = useState<string[]>([]);
+  const [perfil, setPerfil] = useState("");
+  const [momento, setMomento] = useState("");
+  const [interesses, setInteresses] = useState<string[]>([]);
+  const [pain, setPain] = useState("");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">(
     "idle"
   );
   const [message, setMessage] = useState("");
 
-  function toggleQ2(option: string) {
-    setQ2((prev) =>
+  function toggleInteresse(option: string) {
+    setInteresses((prev) =>
       prev.includes(option)
         ? prev.filter((o) => o !== option)
         : [...prev, option]
@@ -40,7 +53,13 @@ export function Survey() {
       const res = await fetch("/api/survey", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ q1, q2, email: email || undefined }),
+        body: JSON.stringify({
+          perfil,
+          momento,
+          interesses,
+          pain: pain || undefined,
+          email: email || undefined,
+        }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Erro ao enviar.");
@@ -68,19 +87,70 @@ export function Survey() {
   return (
     <form onSubmit={handleSubmit} className="space-y-8 text-left">
       <fieldset>
-        <legend className="kicker mb-3">1. Como você quer aprender?</legend>
+        <legend className="kicker mb-3">1. Você tá nessa como…?</legend>
         <div className="space-y-2">
-          {Q1_OPTIONS.map((opt) => (
+          {PERFIL_OPTIONS.map((opt) => (
             <label
-              key={opt}
-              className={`${optionBase} ${q1 === opt ? optionOn : optionOff}`}
+              key={opt.value}
+              className={`${optionBase} ${
+                perfil === opt.value ? optionOn : optionOff
+              }`}
             >
               <input
                 type="radio"
-                name="q1"
+                name="perfil"
+                value={opt.value}
+                checked={perfil === opt.value}
+                onChange={() => setPerfil(opt.value)}
+                className="accent-lima"
+              />
+              <span>{opt.label}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend className="kicker mb-3">2. E a IA + o seu bolso hoje?</legend>
+        <div className="space-y-2">
+          {MOMENTO_OPTIONS.map((opt) => (
+            <label
+              key={opt.value}
+              className={`${optionBase} ${
+                momento === opt.value ? optionOn : optionOff
+              }`}
+            >
+              <input
+                type="radio"
+                name="momento"
+                value={opt.value}
+                checked={momento === opt.value}
+                onChange={() => setMomento(opt.value)}
+                className="accent-lima"
+              />
+              <span>{opt.label}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend className="kicker mb-3">
+          3. No que você mais quer que a IA ajude? (marque tudo)
+        </legend>
+        <div className="space-y-2">
+          {INTERESSE_OPTIONS.map((opt) => (
+            <label
+              key={opt}
+              className={`${optionBase} ${
+                interesses.includes(opt) ? optionOn : optionOff
+              }`}
+            >
+              <input
+                type="checkbox"
                 value={opt}
-                checked={q1 === opt}
-                onChange={() => setQ1(opt)}
+                checked={interesses.includes(opt)}
+                onChange={() => toggleInteresse(opt)}
                 className="accent-lima"
               />
               <span>{opt}</span>
@@ -91,27 +161,15 @@ export function Survey() {
 
       <fieldset>
         <legend className="kicker mb-3">
-          2. No que você mais quer que a IA ajude? (marque tudo)
+          4. A única coisa que você queria que a IA resolvesse pra você?
         </legend>
-        <div className="space-y-2">
-          {Q2_OPTIONS.map((opt) => (
-            <label
-              key={opt}
-              className={`${optionBase} ${
-                q2.includes(opt) ? optionOn : optionOff
-              }`}
-            >
-              <input
-                type="checkbox"
-                value={opt}
-                checked={q2.includes(opt)}
-                onChange={() => toggleQ2(opt)}
-                className="accent-lima"
-              />
-              <span>{opt}</span>
-            </label>
-          ))}
-        </div>
+        <textarea
+          value={pain}
+          onChange={(e) => setPain(e.target.value)}
+          rows={3}
+          placeholder="Me conta com as suas palavras… (opcional)"
+          className="w-full resize-none rounded-ctl border border-white/10 bg-surface px-5 py-3 text-cream outline-none placeholder:text-cream/35 focus:border-lima"
+        />
       </fieldset>
 
       <div className="flex flex-col gap-3 sm:flex-row">
@@ -124,7 +182,7 @@ export function Survey() {
         />
         <button
           type="submit"
-          disabled={status === "loading" || !q1}
+          disabled={status === "loading" || !perfil}
           className="whitespace-nowrap rounded-ctl bg-lima px-6 py-3 font-semibold text-ink transition-opacity hover:opacity-90 disabled:opacity-50"
         >
           {status === "loading" ? "Enviando…" : "Enviar"}

@@ -3,27 +3,57 @@ import { getSupabaseAdmin, upsertLead, addTags } from "@/lib/supabase";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// Mapeia respostas Q2 → tags de interesse (Scripts §2.1)
-const Q2_TAG: Record<string, string> = {
+// Interesse (label) → tag de interesse
+const INTERESSE_TAG: Record<string, string> = {
   "Automatizar meu negócio": "int-automatizar",
   "Produzir conteúdo com a minha cara": "int-produzir",
   "Decidir melhor": "int-decidir",
-  "Montar a IA do meu time/empresa": "int-empresa",
+  "Montar a IA do meu time ou empresa": "int-empresa",
 };
 
+const PERFIL_TAG: Record<string, string> = {
+  solo: "perfil-solo",
+  estudio: "perfil-estudio",
+  ceo: "perfil-ceo",
+  comecando: "perfil-comecando",
+};
+
+const MOMENTO_TAG: Record<string, string> = {
+  travado: "momento-travado",
+  "usa-naofatura": "momento-usa-naofatura",
+  faturando: "momento-faturando",
+  zero: "momento-zero",
+};
+
+// Classificador: posiciona o lead na escada comercial (degrau recomendado).
+function ladderTag(perfil: string, momento: string): string {
+  if (perfil === "ceo") return "ladder-ceoexpress";
+  if (perfil === "estudio") return "ladder-b2b";
+  if (momento === "faturando") return "ladder-quaseverdade";
+  return "ladder-diaum";
+}
+
 export async function POST(req: NextRequest) {
-  let body: { q1?: string; q2?: string[]; email?: string };
+  let body: {
+    perfil?: string;
+    momento?: string;
+    interesses?: string[];
+    pain?: string;
+    email?: string;
+  };
   try {
     body = await req.json();
   } catch {
     return NextResponse.json({ error: "JSON inválido." }, { status: 400 });
   }
 
-  const q1 = (body.q1 || "").trim();
-  const q2 = Array.isArray(body.q2) ? body.q2 : [];
+  const perfil = (body.perfil || "").trim();
+  const momento = (body.momento || "").trim();
+  const interesses = Array.isArray(body.interesses) ? body.interesses : [];
+  const pain = (body.pain || "").trim() || null;
   const email = (body.email || "").trim().toLowerCase();
 
-  if (!q1) {
+  if (!perfil) {
     return NextResponse.json(
       { error: "Responde ao menos a primeira pergunta." },
       { status: 400 }
@@ -32,19 +62,28 @@ export async function POST(req: NextRequest) {
 
   try {
     let leadId: string | null = null;
-    const tags: string[] = [];
 
     if (email && EMAIL_RE.test(email)) {
       leadId = await upsertLead(email, "survey");
 
-      // Roteamento de funil (Scripts §2.2):
-      // empresa/decidir → executivo; senão → criador.
-      const interestTags = q2.map((o) => Q2_TAG[o]).filter(Boolean);
+      const tags: string[] = [];
+      const interestTags = interesses
+        .map((o) => INTERESSE_TAG[o])
+        .filter(Boolean);
       tags.push(...interestTags);
+      if (PERFIL_TAG[perfil]) tags.push(PERFIL_TAG[perfil]);
+      if (MOMENTO_TAG[momento]) tags.push(MOMENTO_TAG[momento]);
+
+      // Roteamento de funil: estúdio/CEO ou interesse empresa/decisão → executivo.
       const isExec =
+        perfil === "ceo" ||
+        perfil === "estudio" ||
         interestTags.includes("int-empresa") ||
         interestTags.includes("int-decidir");
       tags.push(isExec ? "funil-executivo" : "funil-criador");
+
+      // Degrau recomendado da escada.
+      tags.push(ladderTag(perfil, momento));
 
       await addTags(leadId, tags);
     }
@@ -52,8 +91,10 @@ export async function POST(req: NextRequest) {
     const supabase = getSupabaseAdmin();
     const { error } = await supabase.from("survey_responses").insert({
       lead_id: leadId,
-      q1,
-      q2,
+      perfil,
+      momento,
+      q2: interesses,
+      pain,
     });
     if (error) throw error;
 
