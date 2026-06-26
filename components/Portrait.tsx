@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 
-// Slot de retrato do Marcel. Tenta carregar /public/marcel.jpg de forma
-// silenciosa (pré-load via Image()) e só troca o placeholder pela foto
-// quando ela carrega de fato — sem flash de imagem quebrada.
+// Slot de retrato do Marcel. Preenche o container do pai (a largura é
+// controlada no hero). Tenta carregar /public/marcel.jpg silenciosamente e
+// só troca o placeholder pela foto quando ela carrega — sem flash quebrado.
 export function Portrait() {
   const [ok, setOk] = useState(false);
 
@@ -15,7 +15,7 @@ export function Portrait() {
   }, []);
 
   return (
-    <div className="relative aspect-[4/5] w-40 shrink-0 overflow-hidden rounded-card border border-white/10 bg-surface sm:w-48">
+    <div className="relative aspect-[4/5] w-full overflow-hidden rounded-card">
       {ok ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
@@ -24,7 +24,7 @@ export function Portrait() {
           className="h-full w-full object-cover"
         />
       ) : (
-        <div className="flex h-full w-full flex-col items-center justify-center gap-1.5 px-3 text-center">
+        <div className="flex h-full w-full flex-col items-center justify-center gap-1.5 border border-white/10 bg-surface px-3 text-center">
           <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-lima/70">
             sua foto
           </span>
@@ -33,9 +33,6 @@ export function Portrait() {
           </span>
         </div>
       )}
-      {/* Cantos lima — vocabulário arquitetônico do DS */}
-      <span className="pointer-events-none absolute left-0 top-0 h-3 w-3 border-l border-t border-lima/60" />
-      <span className="pointer-events-none absolute bottom-0 right-0 h-3 w-3 border-b border-r border-lima/60" />
     </div>
   );
 }

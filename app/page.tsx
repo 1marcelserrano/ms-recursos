@@ -6,10 +6,12 @@ import { Portrait } from "@/components/Portrait";
 export default function HomePage() {
   return (
     <div className="mx-auto max-w-3xl px-6">
-      {/* Hero + autoridade + retrato */}
-      <section className="flex flex-col gap-8 pt-16 sm:flex-row sm:items-center sm:pt-24">
-        <Portrait />
-        <div>
+      {/* Hero — retrato acima, texto abaixo */}
+      <section className="pt-16 sm:pt-24">
+        <div className="w-64 sm:w-80">
+          <Portrait />
+        </div>
+        <div className="mt-10">
           <p className="kicker">Oi, eu sou o Marcel</p>
           <h1 className="mt-3 font-display text-4xl font-semibold leading-[1.08] tracking-[-0.02em] text-cream sm:text-5xl">
             Eu te ajudo a usar IA pra fazer o seu trabalho render muito mais.
