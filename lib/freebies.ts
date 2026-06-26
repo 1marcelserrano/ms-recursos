@@ -62,6 +62,20 @@ export const FREEBIES: Freebie[] = [
   },
   {
     order: 3,
+    skillId: "open-collider",
+    keyword: "COLLIDER",
+    title: "Ideias batidas? Colida domínios distantes e ache o ângulo novo.",
+    subtitle: "Originalidade com método, sem depender de sorte.",
+    lane: "DECISÃO",
+    funnel: "executivo",
+    surveyTag: "int-decidir",
+    ctaDestination: "GATED",
+    assetUrl:
+      process.env.NEXT_PUBLIC_FREEBIE_COLLIDER_URL ||
+      "https://github.com/1marcelserrano/open-collider",
+  },
+  {
+    order: 4,
     skillId: "prompt-chain",
     keyword: "FLUXO",
     title: "Pare de pedir uma coisa por vez. Encadeie e veja rodar.",
