@@ -63,13 +63,15 @@ export default function HomePage() {
       <section className="mt-20 rounded-card border border-white/10 bg-surface p-8 sm:p-10">
         <p className="kicker">O sistema operacional criativo</p>
         <h2 className="mt-3 font-display text-3xl font-semibold tracking-[-0.02em] text-cream">
-          Pare de usar IA como Google turbinado. Comece a rodar a cozinha.
+          Sua IA ainda é um estagiário. Dá pra virar um time sênior.
         </h2>
         <p className="mt-5 text-cream/80">
-          A maioria usa IA peça por peça. Um OS criativo é o próximo passo: ele
-          atravessa o seu negócio e a sua produção, e as coisas saem sem você em
-          cada estação. Eu compartilho como construo o meu — entra na lista pra
-          receber os recursos grátis e o primeiro acesso ao que vem.
+          Hoje você pede uma coisa, espera, revisa, repete, como quem
+          supervisiona um estagiário o dia todo. Um sistema bem montado funciona
+          como uma equipe de especialistas que já sabe exatamente o que e quando
+          fazer. Eu te mostro como estou construindo o meu. Entre na lista para
+          acessar os recursos gratuitos, e ter preferência nos meus próximos
+          lançamentos.
         </p>
         <div className="mt-6">
           <OptInForm source="home" />
