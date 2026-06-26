@@ -53,27 +53,27 @@ export function Survey() {
 
   if (status === "done") {
     return (
-      <p className="text-lg font-medium text-forest">
+      <p className="text-lg font-medium text-lima">
         Valeu! Sua resposta molda o que vem a seguir. 🙌
       </p>
     );
   }
 
+  const optionBase =
+    "flex cursor-pointer items-center gap-3 rounded-ctl border px-4 py-2.5 transition-colors";
+  const optionOn = "border-lima/60 bg-lima/10 text-cream";
+  const optionOff =
+    "border-white/10 bg-surface text-cream/80 hover:border-lima/40";
+
   return (
     <form onSubmit={handleSubmit} className="space-y-8 text-left">
       <fieldset>
-        <legend className="mb-3 font-semibold text-clay">
-          1. Como você quer aprender?
-        </legend>
+        <legend className="kicker mb-3">1. Como você quer aprender?</legend>
         <div className="space-y-2">
           {Q1_OPTIONS.map((opt) => (
             <label
               key={opt}
-              className={`flex cursor-pointer items-center gap-3 rounded-pill border px-4 py-2.5 transition-colors ${
-                q1 === opt
-                  ? "border-forest bg-forest/10"
-                  : "border-forest/15 bg-cream-card hover:border-forest/40"
-              }`}
+              className={`${optionBase} ${q1 === opt ? optionOn : optionOff}`}
             >
               <input
                 type="radio"
@@ -81,7 +81,7 @@ export function Survey() {
                 value={opt}
                 checked={q1 === opt}
                 onChange={() => setQ1(opt)}
-                className="accent-forest"
+                className="accent-lima"
               />
               <span>{opt}</span>
             </label>
@@ -90,17 +90,15 @@ export function Survey() {
       </fieldset>
 
       <fieldset>
-        <legend className="mb-3 font-semibold text-clay">
+        <legend className="kicker mb-3">
           2. No que você mais quer que a IA ajude? (marque tudo)
         </legend>
         <div className="space-y-2">
           {Q2_OPTIONS.map((opt) => (
             <label
               key={opt}
-              className={`flex cursor-pointer items-center gap-3 rounded-pill border px-4 py-2.5 transition-colors ${
-                q2.includes(opt)
-                  ? "border-forest bg-forest/10"
-                  : "border-forest/15 bg-cream-card hover:border-forest/40"
+              className={`${optionBase} ${
+                q2.includes(opt) ? optionOn : optionOff
               }`}
             >
               <input
@@ -108,7 +106,7 @@ export function Survey() {
                 value={opt}
                 checked={q2.includes(opt)}
                 onChange={() => toggleQ2(opt)}
-                className="accent-forest"
+                className="accent-lima"
               />
               <span>{opt}</span>
             </label>
@@ -122,17 +120,17 @@ export function Survey() {
           placeholder="seu@email.com (opcional, pra eu te avisar)"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full rounded-pill border border-forest/15 bg-cream-card px-5 py-3 outline-none placeholder:text-muted focus:border-forest"
+          className="w-full rounded-ctl border border-white/10 bg-surface px-5 py-3 text-cream outline-none placeholder:text-cream/35 focus:border-lima"
         />
         <button
           type="submit"
           disabled={status === "loading" || !q1}
-          className="whitespace-nowrap rounded-pill bg-forest px-6 py-3 font-semibold text-cream transition-opacity hover:opacity-90 disabled:opacity-50"
+          className="whitespace-nowrap rounded-ctl bg-lima px-6 py-3 font-semibold text-ink transition-opacity hover:opacity-90 disabled:opacity-50"
         >
           {status === "loading" ? "Enviando…" : "Enviar"}
         </button>
       </div>
-      {status === "error" && <p className="text-sm text-clay">{message}</p>}
+      {status === "error" && <p className="text-sm text-lima">{message}</p>}
     </form>
   );
 }

@@ -10,16 +10,16 @@ export function FreebieCard({ freebie }: { freebie: Freebie }) {
   const lane = LANE_STYLES[freebie.lane];
 
   return (
-    <div className="flex flex-col rounded-2xl border border-forest/10 bg-cream-card p-6 shadow-sm">
+    <div className="flex flex-col rounded-card border border-white/10 bg-surface p-6 transition-colors hover:border-lima/30">
       <span
-        className={`mb-3 inline-flex w-fit rounded-pill px-3 py-1 text-xs font-semibold ${lane.badge} ${lane.text}`}
+        className={`mb-3 inline-flex w-fit rounded-ctl px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] ${lane.badge} ${lane.text}`}
       >
         {freebie.lane}
       </span>
-      <h3 className="font-display text-xl font-semibold text-forest-deep">
+      <h3 className="font-display text-xl font-semibold text-cream">
         {freebie.title}
       </h3>
-      <p className="mt-2 flex-1 text-muted">{freebie.subtitle}</p>
+      <p className="mt-2 flex-1 text-cream/55">{freebie.subtitle}</p>
 
       <div className="mt-5">
         {unlockedUrl ? (
@@ -27,7 +27,7 @@ export function FreebieCard({ freebie }: { freebie: Freebie }) {
             href={unlockedUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-semibold text-clay hover:underline"
+            className="font-medium text-lima hover:underline"
           >
             Abrir o recurso →
           </a>
@@ -36,13 +36,13 @@ export function FreebieCard({ freebie }: { freebie: Freebie }) {
             href={freebie.assetUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-semibold text-clay hover:underline"
+            className="font-medium text-lima hover:underline"
           >
             Abrir →
           </a>
         ) : open ? (
           <div className="space-y-2">
-            <p className="text-sm text-muted">
+            <p className="text-sm text-cream/55">
               Deixa seu email que eu te mando:
             </p>
             <OptInForm
@@ -56,7 +56,7 @@ export function FreebieCard({ freebie }: { freebie: Freebie }) {
         ) : (
           <button
             onClick={() => setOpen(true)}
-            className="font-semibold text-clay hover:underline"
+            className="font-medium text-lima hover:underline"
           >
             Abrir →
           </button>

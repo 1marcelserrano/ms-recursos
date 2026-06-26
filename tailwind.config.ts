@@ -1,5 +1,7 @@
 import type { Config } from "tailwindcss";
 
+// MSCREATIVE.SYSTEMS™ — Design System V3.0 (Chumbo Puro + Lima Ácida)
+// Fonte: design-system/css/tokens.css (DEC-001/004/020/023/024)
 const config: Config = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -8,22 +10,24 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Paleta inspirada na referência: cream + verde-escuro + laranja
-        cream: "#F2EDE4",
-        "cream-card": "#FBF9F4",
-        forest: "#3A4A3A",
-        "forest-deep": "#2C382C",
-        clay: "#E07A3F",
-        "clay-soft": "#E89B6C",
-        ink: "#2B2B26",
-        muted: "#6B6B60",
+        bg: "#0A0A0E", // base
+        "bg-end": "#111114", // fim do gradiente
+        surface: "#16181F", // cards
+        "surface-2": "#1C1F28", // hover
+        cream: "#B2A898", // corpo + headlines (warm low-saturation)
+        ink: "#0A0A0E", // texto sobre lima
+        lima: "#B4C636", // acento principal (DEC-020)
+        "lima-deep": "#6A7820",
+        gold: "#E8C547", // cerimonial — só em selo
       },
       fontFamily: {
-        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
-        display: ["var(--font-display)", "Georgia", "serif"],
+        display: ["var(--font-fraunces)", "Georgia", "serif"],
+        sans: ["var(--font-inter-tight)", "system-ui", "sans-serif"],
+        mono: ["var(--font-plex-mono)", "ui-monospace", "monospace"],
       },
       borderRadius: {
-        pill: "9999px",
+        card: "4px",
+        ctl: "3px",
       },
     },
   },

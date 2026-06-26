@@ -32,19 +32,21 @@ export async function sendFreebieEmail(
 }
 
 function renderEmail(freebie: Freebie): string {
+  // DS V3.0 — Chumbo Puro + Lima Ácida. Fonte serif p/ headline (Georgia
+  // como fallback de Fraunces, que e-mail não carrega de forma confiável).
   return `
-  <div style="font-family: ui-sans-serif, system-ui, sans-serif; background:#F2EDE4; padding:32px;">
-    <div style="max-width:520px; margin:0 auto; background:#FBF9F4; border-radius:16px; padding:32px;">
-      <p style="letter-spacing:0.18em; text-transform:uppercase; font-weight:700; font-size:12px; color:#E07A3F; margin:0 0 8px;">Seu recurso grátis</p>
-      <h1 style="font-size:22px; color:#2C382C; margin:0 0 12px;">${escapeHtml(
+  <div style="font-family: -apple-system, 'Inter Tight', system-ui, sans-serif; background:#0A0A0E; padding:32px;">
+    <div style="max-width:520px; margin:0 auto; background:#16181F; border:1px solid rgba(255,255,255,0.08); border-radius:4px; padding:32px;">
+      <p style="font-family:'IBM Plex Mono',monospace; letter-spacing:0.22em; text-transform:uppercase; font-weight:500; font-size:11px; color:#B4C636; margin:0 0 10px;">Seu recurso grátis</p>
+      <h1 style="font-family:Georgia,serif; font-weight:600; font-size:22px; color:#B2A898; margin:0 0 12px;">${escapeHtml(
         freebie.title
       )}</h1>
-      <p style="color:#6B6B60; margin:0 0 24px;">${escapeHtml(
+      <p style="color:rgba(178,168,152,0.65); margin:0 0 24px;">${escapeHtml(
         freebie.subtitle
       )}</p>
-      <a href="${freebie.assetUrl}" style="display:inline-block; background:#3A4A3A; color:#F2EDE4; text-decoration:none; padding:12px 24px; border-radius:9999px; font-weight:600;">Abrir o recurso →</a>
-      <p style="color:#6B6B60; font-size:13px; margin:28px 0 0;">Curtiu? No <strong>Dia Um</strong> você sai com o primeiro resultado funcionando hoje. Te conto mais em breve.</p>
-      <p style="color:#9b9b90; font-size:12px; margin:24px 0 0;">MS Creative Keys · uma marca MSCREATIVE.SYSTEMS™</p>
+      <a href="${freebie.assetUrl}" style="display:inline-block; background:#B4C636; color:#0A0A0E; text-decoration:none; padding:12px 24px; border-radius:3px; font-weight:600;">Abrir o recurso →</a>
+      <p style="color:rgba(178,168,152,0.55); font-size:13px; margin:28px 0 0;">Curtiu? No <strong style="color:#B2A898;">Dia Um</strong> você sai com o primeiro resultado funcionando hoje. Te conto mais em breve.</p>
+      <p style="font-family:'IBM Plex Mono',monospace; color:rgba(178,168,152,0.38); font-size:11px; letter-spacing:0.05em; margin:24px 0 0;">MS Creative Keys · uma marca MSCREATIVE.SYSTEMS™</p>
     </div>
   </div>`;
 }

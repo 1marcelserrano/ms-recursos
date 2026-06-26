@@ -49,7 +49,7 @@ export function OptInForm({
   }
 
   if (status === "done") {
-    return <p className="text-sm font-medium text-forest">{message}</p>;
+    return <p className="text-sm font-medium text-lima">{message}</p>;
   }
 
   return (
@@ -63,17 +63,17 @@ export function OptInForm({
         placeholder="seu@email.com"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="w-full rounded-pill border border-forest/15 bg-cream-card px-5 py-3 text-ink outline-none placeholder:text-muted focus:border-forest"
+        className="w-full rounded-ctl border border-white/10 bg-surface px-5 py-3 text-cream outline-none placeholder:text-cream/35 focus:border-lima"
       />
       <button
         type="submit"
         disabled={status === "loading"}
-        className="whitespace-nowrap rounded-pill bg-clay px-6 py-3 font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-60"
+        className="whitespace-nowrap rounded-ctl bg-lima px-6 py-3 font-semibold text-ink transition-opacity hover:opacity-90 disabled:opacity-60"
       >
         {status === "loading" ? "Enviando…" : buttonLabel}
       </button>
       {status === "error" && (
-        <p className="text-sm text-clay sm:w-full">{message}</p>
+        <p className="text-sm text-lima sm:w-full">{message}</p>
       )}
     </form>
   );

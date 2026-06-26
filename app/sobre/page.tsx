@@ -15,20 +15,20 @@ export const metadata = {
 export default function SobrePage() {
   return (
     <div className="mx-auto max-w-2xl px-6 pt-16 text-center sm:pt-24">
-      <p className="kicker text-clay">Contato</p>
-      <h1 className="mt-3 font-display text-4xl font-bold text-forest-deep">
+      <p className="kicker">Contato</p>
+      <h1 className="mt-3 font-display text-4xl font-semibold tracking-[-0.02em] text-cream">
         Vamos conversar
       </h1>
-      <p className="mx-auto mt-4 max-w-md text-muted">
+      <p className="mx-auto mt-4 max-w-md text-cream/55">
         Dúvidas, parcerias ou colaborações — me chama direto ou me acha no seu
         canal preferido.
       </p>
 
       <a
         href={`mailto:${CONTACT_EMAIL}`}
-        className="mt-8 inline-block rounded-pill bg-forest px-7 py-3 font-semibold text-cream transition-opacity hover:opacity-90"
+        className="mt-8 inline-block rounded-ctl bg-lima px-7 py-3 font-semibold text-ink transition-opacity hover:opacity-90"
       >
-        ✉️ {CONTACT_EMAIL}
+        {CONTACT_EMAIL}
       </a>
 
       <div className="mt-8 flex justify-center gap-3">
@@ -38,22 +38,20 @@ export default function SobrePage() {
             href={c.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-pill border border-forest/15 bg-cream-card px-4 py-2 text-sm font-medium text-forest hover:border-forest/40"
+            className="rounded-ctl border border-white/10 bg-surface px-4 py-2 text-sm font-medium text-cream/70 transition-colors hover:border-lima/50 hover:text-lima"
           >
             {c.label}
           </a>
         ))}
       </div>
 
-      <div className="mt-14 rounded-2xl bg-cream-card p-8">
-        <p className="text-ink">
-          Quer o primeiro resultado funcionando hoje?
-        </p>
+      <div className="mt-14 rounded-card border border-white/10 bg-surface p-8">
+        <p className="text-cream/80">Quer o primeiro resultado funcionando hoje?</p>
         <a
           href={SKOOL_DIA_UM_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-4 inline-block rounded-pill bg-clay px-7 py-3 font-semibold text-white transition-opacity hover:opacity-90"
+          className="mt-4 inline-block rounded-ctl border border-lima/40 px-7 py-3 font-semibold text-lima transition-colors hover:bg-lima/10"
         >
           Conhecer o Dia Um (R$97,99)
         </a>

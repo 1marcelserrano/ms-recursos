@@ -2,28 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-    Helvetica, Arial, sans-serif;
-  --font-display: "Iowan Old Style", "Palatino Linotype", "URW Palladio L",
-    Georgia, serif;
-}
-
 html {
   scroll-behavior: smooth;
 }
 
+/* DS V3.0 — grid 54px (linhas EM CIMA) sobre o gradiente Chumbo Puro (base).
+   Espelha ds-shell.css: linhas de 1px via linear-gradient + background-size 54px.
+   A ordem importa: as duas camadas de grid vêm primeiro (topo), o gradiente
+   opaco fica por último (base) — senão ele cobre as linhas. */
 body {
-  background-color: theme("colors.cream");
-  color: theme("colors.ink");
-  font-family: var(--font-sans);
+  background-color: #0a0a0e;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(145deg, #0a0a0e 0%, #111114 100%);
+  background-size: 54px 54px, 54px 54px, 100% 100%;
+  background-attachment: fixed;
+  color: #b2a898;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Label kicker (ex.: "RECURSOS GRÁTIS") */
+/* Fraunces governa headline com eixo óptico (warmth editorial) */
+.font-display {
+  font-variation-settings: "opsz" 72;
+}
+
+/* Label kicker mono (DEC-023: caps permitido em kicker mono) */
 .kicker {
-  letter-spacing: 0.18em;
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  font-weight: 700;
-  font-size: 0.75rem;
+  font-weight: 500;
+  font-size: 0.72rem;
+  color: #b4c636;
 }

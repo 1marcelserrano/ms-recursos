@@ -19,12 +19,13 @@ export interface Freebie {
   assetUrl: string; // link do freebie (Notion/PDF) — trocar quando definido
 }
 
-// Cores por lane (Tailwind class fragments)
+// Cores por lane (Tailwind class fragments) — DS V3.0: lima nas lanes de ação,
+// cream silenciado no catálogo. Acento mono-cromático por disciplina do DS.
 export const LANE_STYLES: Record<Lane, { badge: string; text: string }> = {
-  CONTEÚDO: { badge: "bg-clay/15", text: "text-clay" },
-  DECISÃO: { badge: "bg-forest/15", text: "text-forest" },
-  SISTEMA: { badge: "bg-forest-deep/15", text: "text-forest-deep" },
-  CATÁLOGO: { badge: "bg-muted/15", text: "text-muted" },
+  CONTEÚDO: { badge: "bg-lima/10", text: "text-lima" },
+  DECISÃO: { badge: "bg-lima/10", text: "text-lima" },
+  SISTEMA: { badge: "bg-lima/10", text: "text-lima" },
+  CATÁLOGO: { badge: "bg-white/5", text: "text-cream/55" },
 };
 
 // Placeholder até o usuário definir o destino real de cada freebie.
