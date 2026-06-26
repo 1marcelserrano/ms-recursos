@@ -1,18 +1,27 @@
-const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "oi@mscreative.systems";
+const CONTACT_EMAIL =
+  process.env.NEXT_PUBLIC_CONTACT_EMAIL || "marcel@marcelserrano.com";
 const SKOOL_DIA_UM_URL = process.env.NEXT_PUBLIC_SKOOL_DIA_UM_URL || "#";
 
+// UTMs pra rastrear, no destino, que o clique veio do funil /recursos.
+function withUtm(url: string): string {
+  const u = new URL(url);
+  u.searchParams.set("utm_source", "ms-recursos");
+  u.searchParams.set("utm_medium", "site");
+  u.searchParams.set("utm_campaign", "contato");
+  return u.toString();
+}
+
 const CHANNELS = [
-  { label: "YouTube", href: process.env.NEXT_PUBLIC_YOUTUBE_URL || "#" },
-  { label: "Instagram", href: process.env.NEXT_PUBLIC_INSTAGRAM_URL || "#" },
-  { label: "TikTok", href: process.env.NEXT_PUBLIC_TIKTOK_URL || "#" },
-  { label: "LinkedIn", href: process.env.NEXT_PUBLIC_LINKEDIN_URL || "#" },
+  { label: "Instagram", href: withUtm("https://www.instagram.com/mscreative.systems") },
+  { label: "LinkedIn", href: withUtm("https://www.linkedin.com/in/marcelserrano/") },
+  { label: "Substack", href: withUtm("https://fronteirista.substack.com/") },
 ];
 
 export const metadata = {
-  title: "Sobre — MS Creative Keys",
+  title: "Contato — MS Creative Keys",
 };
 
-export default function SobrePage() {
+export default function ContatoPage() {
   return (
     <div className="mx-auto max-w-2xl px-6 pt-16 text-center sm:pt-24">
       <p className="kicker">Contato</p>
@@ -20,7 +29,7 @@ export default function SobrePage() {
         Vamos conversar
       </h1>
       <p className="mx-auto mt-4 max-w-md text-cream/55">
-        Dúvidas, parcerias ou colaborações — me chama direto ou me acha no seu
+        Dúvidas, parcerias ou colaborações: me chama direto ou me acha no seu
         canal preferido.
       </p>
 
