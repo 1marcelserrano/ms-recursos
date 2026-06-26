@@ -66,7 +66,9 @@ export const FREEBIES: Freebie[] = [
     funnel: "criador",
     surveyTag: "int-produzir",
     ctaDestination: "GATED",
-    assetUrl: process.env.NEXT_PUBLIC_FREEBIE_VOZ_URL || PLACEHOLDER,
+    assetUrl:
+      process.env.NEXT_PUBLIC_FREEBIE_VOZ_URL ||
+      "https://github.com/1marcelserrano/nem-parece-ia",
   },
   {
     order: 4,
@@ -78,7 +80,9 @@ export const FREEBIES: Freebie[] = [
     funnel: "executivo",
     surveyTag: "int-decidir",
     ctaDestination: "GATED",
-    assetUrl: process.env.NEXT_PUBLIC_FREEBIE_ORACLE_URL || PLACEHOLDER,
+    assetUrl:
+      process.env.NEXT_PUBLIC_FREEBIE_ORACLE_URL ||
+      "https://github.com/1marcelserrano/oracle-diagnostic-lite",
   },
   {
     order: 5,
@@ -90,7 +94,9 @@ export const FREEBIES: Freebie[] = [
     funnel: "criador",
     surveyTag: "int-automatizar",
     ctaDestination: "GATED",
-    assetUrl: process.env.NEXT_PUBLIC_FREEBIE_FLUXO_URL || PLACEHOLDER,
+    assetUrl:
+      process.env.NEXT_PUBLIC_FREEBIE_FLUXO_URL ||
+      "https://github.com/1marcelserrano/prompt-chain",
   },
   {
     order: 6,
@@ -102,7 +108,9 @@ export const FREEBIES: Freebie[] = [
     funnel: "ambos",
     surveyTag: "int-produzir",
     ctaDestination: "DIRECT",
-    assetUrl: process.env.NEXT_PUBLIC_FREEBIE_SKILLS_URL || PLACEHOLDER,
+    assetUrl:
+      process.env.NEXT_PUBLIC_FREEBIE_SKILLS_URL ||
+      "https://github.com/1marcelserrano/mscreative-skills",
   },
 ];
 
